@@ -92,6 +92,7 @@ while ($stmt->fetch()) {
     $agent = '';
     $query = "SELECT (SELECT StatusName from Status where StatusID = ClientStatus.StatusID) AS CStatus FROM ClientStatus WHERE ClientID =" . $ClientID;
     $stmt  = $link->prepare($query);
+    error_log($ClientID);
     $stmt->execute();
     mysqli_stmt_bind_result($stmt, $agentName);
     while ($stmt->fetch()) {
