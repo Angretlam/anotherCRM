@@ -124,25 +124,26 @@ while ($stmt->fetch()) {
         </div>
           </div>
     ';
-}
 
-$query = "SELECT (SELECT Name FROM Agents WHERE AgentID = Notes.AgentID), Note, Date FROM Notes WHERE ClientID = " . $ClientID . " Order BY Date DESC";
-$stmt  = $link->prepare($query);
-$stmt->execute();
-mysqli_stmt_bind_result($stmt, $AgentID, $Note, $Date);
 
-while ($stmt->fetch()) {
+    $query = "SELECT (SELECT Name FROM Agents WHERE AgentID = Notes.AgentID), Note, Date FROM Notes WHERE ClientID = " . $ClientID . " Order BY Date DESC";
+    $stmt  = $link->prepare($query);
+    $stmt->execute();
+    mysqli_stmt_bind_result($stmt, $AgentID, $Note, $Date);
 
-    echo '
-    <div class="card" style="width: 80%; margin-bottom:10px; margin-left:auto; margin-right:auto;">
-      <div class="card-body">
-        <h5 class="card-title">' . $Date . '</h5>
-        <h6 class="card-title">' . $AgentID . '</h6>
-        <h6>Note</h6>
-        <p>' . $Note . '</p>
-         </div>
-    </div>';
+    while ($stmt->fetch()) {
 
+        echo '
+        <div class="card" style="width: 80%; margin-bottom:10px; margin-left:auto; margin-right:auto;">
+          <div class="card-body">
+            <h5 class="card-title">' . $Date . '</h5>
+            <h6 class="card-title">' . $AgentID . '</h6>
+            <h6>Note</h6>
+            <p>' . $Note . '</p>
+             </div>
+        </div>';
+
+    }
 }
 
 require('../footer.php');
