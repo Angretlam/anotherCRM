@@ -17,7 +17,7 @@ if (!$link) {
 }
 
 // Get all the agent data from the database. Needs to be updated
-$query = "SELECT AgentID, Name, Email, WorkNumber, HomeNumber, CellNumber FROM Clients WHERE Name = '" . $link->real_escape_string($_GET['name']) . "'";
+$query = "SELECT AgentID, Name, Email, WorkNumber, HomeNumber, CellNumber FROM Agents WHERE Name = '" . $link->real_escape_string($_GET['name']) . "'";
 $stmt  = $link->prepare($query);
 $stmt->execute();
 mysqli_stmt_bind_result($stmt, $AgentID, $Name, $Email, $WorkNumber, $HomeNumber, $CellNumber);
