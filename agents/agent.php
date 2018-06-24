@@ -70,7 +70,7 @@ echo '
         <div class="form-group">
             <br />
             <label>Client Status</label>
-            <select class="custom-select" name="StandingID">';
+            <select class="custom-select" name="StandingID" disabled>';
 
 // Get the agent status
 $agent = '';
