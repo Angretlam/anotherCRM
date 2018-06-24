@@ -136,6 +136,7 @@ if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
 
 }
 
+echo '<h2>Client list:</h2>';
 
 // Add the clients related to this agent.
 $query = "SELECT (SELECT Name FROM Clients WHERE ClientID = Relations.ClientID) as ClientName FROM Relations WHERE AgentID = ". $AgentID . " Order BY ClientName";
