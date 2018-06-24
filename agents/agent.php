@@ -123,9 +123,11 @@ while ($stmt->fetch()) {
 
 	echo'
 	  <div class="card" style="width: 40%; margin-bottom:10px; margin-left:auto; margin-right:auto;">
-	    <div class="card-body">
-	      <h6 class="card-title">'. $ClientName .'</h6>
-      </div>
+      <a href="https://anothercrmbeta.connorpeoples.com/clients/client?name=' . $ClientName . '">
+        <div class="card-body">
+  	      <h6 class="card-title">'. $ClientName .'</h6>
+        </div>
+      </a>
 	  </div>';
 }
 
