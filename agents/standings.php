@@ -27,5 +27,5 @@ $query = "
 $stmt = $link->prepare($query);
 $stmt->execute();
 
-header('Location: https://anothercrmbeta.connorpeoples.com/clients/client.php?name=' . $_POST["Name"]);
+header('Location: https://anothercrmbeta.connorpeoples.com/agents/agent.php?name=' . $_POST["Name"]);
 ?>
