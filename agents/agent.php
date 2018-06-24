@@ -72,7 +72,7 @@ if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
           <div class="form-group">
               <br />
               <label>Client Status</label>
-              <select class="custom-select" name="StandingID" disabled>';
+              <select class="custom-select" name="StandingID" >';
 } else {
   echo '
       </form>
@@ -83,7 +83,7 @@ if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
           <div class="form-group">
               <br />
               <label>Client Status</label>
-              <select class="custom-select" name="StandingID">';
+              <select class="custom-select" name="StandingID" disabled>';
 }
 
 // Get the agent status
