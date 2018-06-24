@@ -134,7 +134,7 @@ if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
 
 }
 
-echo '<div style="width=80%; margin-left:auto; margin-right:auto;">
+echo '<div style="width:80%; margin-left:auto; margin-right:auto;">
       <h4>Client list:</h4>';
 
 // Add the clients related to this agent.
