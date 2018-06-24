@@ -26,7 +26,7 @@ mysqli_stmt_bind_result($stmt, $AgentID, $Name, $Email, $WorkNumber, $HomeNumber
 // while is required to prevent later queries from running out. Stupid PHP
 while ($stmt->fetch()) {
     // Create the header buttons for the agent page.
-    echo '<h4>Client: ' . $Name . '</h4>
+    echo '<h4>Agent: ' . $Name . '</h4>
     <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Agent Info</button>
     <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Agent Status</button>';
 
@@ -109,6 +109,22 @@ echo ' </select><br /><br />
       <!-- HEre in end the test code stuff -->
     </div>
       </div>';
+
+// Add the clients related to this agent.
+$query = "SELECT (SELECT Name FROM Clients WHERE ClientID = Relations.ClientID) as ClientName FROM Relations WHERE AgentID = ". $AgentID . " Order BY ClientName";
+$stmt = $link->prepare($query);
+$stmt->execute();
+mysqli_stmt_bind_result($stmt, $ClientName);
+
+while ($stmt->fetch()) {
+
+	echo'
+	  <div class="card" style="width: 80%; margin-bottom:10px; margin-left:auto; margin-right:auto;">
+	    <div class="card-body">
+	      <h6 class="card-title">'. $ClientName .'</h6>
+      </div>
+	  </div>';
+}
 
 require('../footer.php');
 ?>
