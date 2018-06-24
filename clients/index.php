@@ -54,7 +54,7 @@ if (array_search('2', $user_roles)) {
 	<div style="width: 80%; margin-left:auto; margin-right:auto;">';
 }
 
-require('../config.php')
+require('../config.php');
 		$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 if (!$link) {

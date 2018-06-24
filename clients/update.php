@@ -1,7 +1,7 @@
 <?php
 include('../auth/auth.php');
 authenticate(2);
-require('../config.php')
+require('../config.php');
 		$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 if (!$link) {
