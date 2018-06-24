@@ -65,8 +65,8 @@ echo '
     </form>
     <div id="addStatus" class="collapse">
     <form method="POST" action="https://anothercrmbeta.connorpeoples.com/clients/status.php">
-            <input type="hidden" name="ClientID" value="' . $ClientID . '">
-                    <input type="hidden" name="Name" value="' . $Name . '">
+        <input type="hidden" name="AgentID" value="' . $AgentID . '">
+        <input type="hidden" name="Name" value="' . $Name . '">
         <div class="form-group">
             <br />
             <label>Client Status</label>
@@ -75,9 +75,9 @@ echo '
 
 // Get the agent status
 $agent = '';
-$query = "SELECT (SELECT StatusName from Status where StatusID = ClientStatus.StatusID) AS CStatus FROM ClientStatus WHERE ClientID =" . $ClientID;
+$query = "SELECT (SELECT StandingName from Standings where StandingID = AgentStanding.StandingID) AS AStanding FROM AgentStanding WHERE AgentID =" . $AgentID;
 $stmt  = $link->prepare($query);
-error_log($ClientID);
+error_log($AgentID);
 $stmt->execute();
 mysqli_stmt_bind_result($stmt, $agentName);
 while ($stmt->fetch()) {
@@ -85,18 +85,18 @@ while ($stmt->fetch()) {
 }
 
 // Generate the select options for the agent status
-$query = "SELECT StatusID, StatusName from Status WHERE StatusID > 0";
+$query = "SELECT StandingID, StandingName from Standings WHERE StandingID > 0";
 $stmt  = $link->prepare($query);
 $stmt->execute();
-mysqli_stmt_bind_result($stmt, $agentID, $agentName);
+mysqli_stmt_bind_result($stmt, $standingID, $standingName);
 
 // Iterate through the results. If the results of the select options query
 // matches the agent status, make that the select value
 while ($stmt->fetch()) {
-    if ($agentName == $agent) {
-        echo '<option selected value="' . $agentID . '">' . $agentName . '</option>';
+    if ($standingName == $agent) {
+        echo '<option selected value="' . $standingID . '">' . $standingName . '</option>';
     } else {
-        echo '<option value="' . $agentID . '">' . $agentName . '</option>';
+        echo '<option value="' . $standingID . '">' . $standingName . '</option>';
     }
 }
 
