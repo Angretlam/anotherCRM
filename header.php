@@ -50,7 +50,7 @@ if (!$_SESSION['authenticated']) {
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto"><!--
           <li class="nav-item active">
-        	<a class="btn btn-info" href="#" role="button">Dashboard</a>  
+        	<a class="btn btn-info" href="#" role="button">Dashboard</a>
 	</li>-->
 
 		<div class="btn-group" style="margin-left: 10px;">
@@ -63,9 +63,9 @@ if (!$_SESSION['authenticated']) {
 		    <div class="dropdown-divider"></div>';
 
                 $query = "
-                        SELECT 
+                        SELECT
                                 Clients.Name, Clients.ClientID
-                        FROM 
+                        FROM
                              Clients";
                 $stmt = $link->prepare($query);
                 $stmt->execute();
@@ -73,7 +73,7 @@ if (!$_SESSION['authenticated']) {
                 // Execute the query
                 mysqli_stmt_bind_result($stmt, $name, $id);
                 while ($stmt->fetch()) {
-                       echo '<a class="dropdown-item" href="' . $id . '">' . $name . '</a>';
+                       echo '<a class="dropdown-item" href="https://anothercrmbeta.connorpeoples.com/clients/client.php?name=' . $name . '">' . $name . '</a>';
                 };
 
 echo '</div>
@@ -90,9 +90,9 @@ echo '</div>
 
                 // Sanitize the input
                 $query = "
-                        SELECT 
+                        SELECT
                         	Agents.Name, Agents.AgentID
-			FROM 
+			FROM
                              Agents
 			WHERE AGENTID != 1";
                 $stmt = $link->prepare($query);
@@ -101,7 +101,7 @@ echo '</div>
                 // Execute the query
                 mysqli_stmt_bind_result($stmt, $name, $id);
                 while ($stmt->fetch()) {
-                       echo '<a class="dropdown-item" href="' . $id . '">' . $name . '</a>';
+                       echo '<a class="dropdown-item" href="https://anothercrmbeta.connorpeoples.com/agents/agent.php?name=' . $name . '">' . $name . '</a>';
                 };
 
 
