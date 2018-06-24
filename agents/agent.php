@@ -4,7 +4,7 @@ require('../header.php');
 
 // Authenticate for general users. No restrictions to this page.
 include('../auth/auth.php');
-authenticate(2);
+$user_roles = authenticate(2);
 
 // Connect to the database
 $link = mysqli_connect('127.0.0.1', 'root', 'P4$$word9522007983', 'onDemandJet');
@@ -61,16 +61,30 @@ while ($stmt->fetch()) {
 }
 
 // Create the agent status form.
-echo '
-    </form>
-    <div id="addStatus" class="collapse">
-    <form method="POST" action="https://anothercrmbeta.connorpeoples.com/agents/standings.php">
-        <input type="hidden" name="AgentID" value="' . $AgentID . '">
-        <input type="hidden" name="Name" value="' . $Name . '">
-        <div class="form-group">
-            <br />
-            <label>Client Status</label>
-            <select class="custom-select" name="StandingID" disabled>';
+
+if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
+  echo '
+      </form>
+      <div id="addStatus" class="collapse">
+      <form method="POST" action="https://anothercrmbeta.connorpeoples.com/agents/standings.php">
+          <input type="hidden" name="AgentID" value="' . $AgentID . '">
+          <input type="hidden" name="Name" value="' . $Name . '">
+          <div class="form-group">
+              <br />
+              <label>Client Status</label>
+              <select class="custom-select" name="StandingID" disabled>';
+} else {
+  echo '
+      </form>
+      <div id="addStatus" class="collapse">
+      <form method="POST" action="https://anothercrmbeta.connorpeoples.com/agents/standings.php">
+          <input type="hidden" name="AgentID" value="' . $AgentID . '">
+          <input type="hidden" name="Name" value="' . $Name . '">
+          <div class="form-group">
+              <br />
+              <label>Client Status</label>
+              <select class="custom-select" name="StandingID">';
+}
 
 // Get the agent status
 $agent = '';
@@ -100,17 +114,28 @@ while ($stmt->fetch()) {
 }
 
 // Close the form
-echo ' </select><br /><br />
-                    <button type="submit" class="btn btn-info">Update</button>
-    </div>
-    </div>
-    </form>
-      <!-- HEre in end the test code stuff -->
-    </div>
+if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
+  echo ' </select><br /><br />
+                      <button type="submit" class="btn btn-info">Update</button>
       </div>
+      </div>
+      </form>
+        <!-- HEre in end the test code stuff -->
+      </div>
+        </div>
+      <div>';
+} else {
+  echo ' </select><br /><br />
+      </div>
+      </div>
+      </form>
+        <!-- HEre in end the test code stuff -->
+      </div>
+        </div>
+      <div>';
 
+}
 
-    <div>';
 
 // Add the clients related to this agent.
 $query = "SELECT (SELECT Name FROM Clients WHERE ClientID = Relations.ClientID) as ClientName FROM Relations WHERE AgentID = ". $AgentID . " Order BY ClientName";
