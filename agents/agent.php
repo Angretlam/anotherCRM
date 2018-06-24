@@ -17,10 +17,10 @@ if (!$link) {
 }
 
 // Get all the agent data from the database. Needs to be updated
-$query = "SELECT ClientID, Name, Email, WorkNumber, HomeNumber, CellNumber, StreetAddress, Suite, ZipCode, State FROM Clients WHERE Name = '" . $link->real_escape_string($_GET['name']) . "'";
+$query = "SELECT AgentID, Name, Email, WorkNumber, HomeNumber, CellNumber FROM Clients WHERE Name = '" . $link->real_escape_string($_GET['name']) . "'";
 $stmt  = $link->prepare($query);
 $stmt->execute();
-mysqli_stmt_bind_result($stmt, $ClientID, $Name, $Email, $WorkNumber, $HomeNumber, $CellNumber, $StreetAddress, $Suite, $ZipCode, $State);
+mysqli_stmt_bind_result($stmt, $AgentID, $Name, $Email, $WorkNumber, $HomeNumber, $CellNumber);
 
 // For each item in the agent table, create the pages needed.
 // while is required to prevent later queries from running out. Stupid PHP
@@ -33,14 +33,14 @@ while ($stmt->fetch()) {
     // Create the Agent information form.
     echo '
         <div id="addAgent" class="collapse">
-          <form method="POST" action="https://anothercrmbeta.connorpeoples.com/clients/update.php">
+          <form method="POST" action="https://anothercrmbeta.connorpeoples.com/agents/update.php">
               <input type="hidden" name="Name" value="' . $Name . '">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Client Name</label>
+                    <label for="exampleInputEmail1">Agent Name</label>
                     <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="' . $Name . '" name="Name" disabled>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Client Email</label>
+                    <label for="exampleInputEmail1">Agent Email</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="' . $Email . '" name="Email">
                   </div>
                   <div class="form-group">
@@ -54,22 +54,6 @@ while ($stmt->fetch()) {
                   <div class="form-group">
                     <label for="exampleInputEmail1">Home Number</label>
                     <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="' . $HomeNumber . '" name="HomeNumber">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Street Address</label>
-                    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="' . $StreetAddress . '" name="StreetAddress">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Suite</label>
-                    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="' . $Suite . '" name="Suite">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Zip Code</label>
-                    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="' . $ZipCode . '" name="Zipcode">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">State</label>
-                    <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="' . $State . '" name="State">
                   </div>
                   <button type="submit" class="btn btn-info">Update</button>
                 </form>
