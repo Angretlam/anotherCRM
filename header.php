@@ -28,6 +28,7 @@
 
 <?php
 session_start();
+require('../config.php');
 if (!$_SESSION['authenticated']) {
 
     echo '
@@ -37,7 +38,7 @@ if (!$_SESSION['authenticated']) {
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
         </form>';
 } else {
-                $link = mysqli_connect('127.0.0.1', 'root', 'P4$$word9522007983', 'onDemandJet');
+                		$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
                 if (!$link) {
                     echo "Error: Unable to connect to MySQL." . PHP_EOL;

@@ -1,14 +1,15 @@
 <?php
 session_start();
+require('../config.php')
 // Access current session, retrieve email. If no email, redirect to home page.
 
-function authenticate ($required_role) { 
+function authenticate ($required_role) {
 	if ($_SESSION['email']) {
 		/*
 		  Retrieve user information from database. Roles.
 		*/
 
-		$link = mysqli_connect('127.0.0.1', 'root', 'P4$$word9522007983', 'onDemandJet');
+		$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 		if (!$link) {
 		    echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -20,13 +21,13 @@ function authenticate ($required_role) {
 		// Sanitize the input
 		$email = $link->real_escape_string($_SESSION['email']);
 		$query = "
-			SELECT 
+			SELECT
 				Auth.RoleID
-			FROM 
-			     Auth 
+			FROM
+			     Auth
 			     INNER JOIN Agents on Agents.AgentID = Auth.AgentID
-			WHERE 
-			     Agents.email = '" . $email . "'"; 
+			WHERE
+			     Agents.email = '" . $email . "'";
 		$stmt = $link->prepare($query);
 		$stmt->execute();
 
@@ -36,7 +37,7 @@ function authenticate ($required_role) {
 		while ($stmt->fetch()) {
 			array_push($roles, $hashed_pws);
 		};
-		
+
 		if (!array_search($required_role, $roles)) {
 			header('Location: https://anothercrmbeta.connorpeoples.com/crm');
 		}

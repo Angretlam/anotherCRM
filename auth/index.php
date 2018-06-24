@@ -1,5 +1,6 @@
 <?php
-/* 
+require('../config.php');
+/*
     Get POST data from login submission form
 */
 $email = $_POST["email"];
@@ -10,7 +11,7 @@ $password = $_POST["password"];
 */
 
 
-$link = mysqli_connect('127.0.0.1', 'root', 'P4$$word9522007983', 'onDemandJet');
+$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -21,7 +22,7 @@ if (!$link) {
 
 // Sanitize the input
 $email = $link->real_escape_string($email);
-$query = "SELECT Password FROM Agents WHERE email = '" . $email . "'"; 
+$query = "SELECT Password FROM Agents WHERE email = '" . $email . "'";
 $stmt = $link->prepare($query);
 $stmt->execute();
 
