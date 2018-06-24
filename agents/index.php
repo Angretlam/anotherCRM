@@ -8,7 +8,7 @@ if (array_search('1', $user_roles)) {
 	 echo '
   <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Add Agent</button>
 	<div id="addAgent" class="collapse">
-	<form method="POST" action="https://anothercrmbeta.connorpeoples.com/agents/add.php">
+	<form method="POST" action="' . $ROOT_URL . 'agents/add.php">
 	    <div class="form-group">
 	      <label for="exampleInputEmail1">Agent Name</label>
 	      <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="John Doe" name="Name">
@@ -45,8 +45,8 @@ if (array_search('1', $user_roles)) {
 
 	<div style="width: 80%; margin-left:auto; margin-right:auto;">';
 }
-
-$link = mysqli_connect('127.0.0.1', 'root', 'P4$$word9522007983', 'onDemandJet');
+require('../config.php');
+$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -62,7 +62,7 @@ mysqli_stmt_bind_result($stmt, $Name, $Email, $WorkNumber, $CellNumber, $HomeNum
 while ($stmt->fetch()) {
 	echo '
 		<div class="card" style="width: 45%; margin:10px; float:left;">
-			<a href="https://anothercrmbeta.connorpeoples.com/agents/agent.php?name=' . $Name . '">
+			<a href="' . $ROOT_URL . 'agents/agent.php?name=' . $Name . '">
 			  <div class="card-body">
 			    <h5 class="card-title">' . $Name . '</h5>
 			    <ul>

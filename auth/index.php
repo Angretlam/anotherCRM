@@ -43,5 +43,5 @@ if (password_verify($password, $hashed_pws)) {
 
 mysqli_close($link);
 
-header('Location: https://anothercrmbeta.connorpeoples.com/');
+header('Location: ' . $ROOT_URL . '');
 ?>

@@ -1,8 +1,8 @@
 <?php
 include('../auth/auth.php');
 authenticate(2);
-
-$link = mysqli_connect('127.0.0.1', 'root', 'P4$$word9522007983', 'onDemandJet');
+require('../config.php');
+$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -25,5 +25,5 @@ $query = "
 $stmt = $link->prepare($query);
 $stmt->execute();
 
-header('Location: https://anothercrmbeta.connorpeoples.com/agents/agent.php?name=' . $_POST["Name"]);
+header('Location: ' . $ROOT_URL . 'agents/agent.php?name=' . $_POST["Name"]);
 ?>

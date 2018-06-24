@@ -1,14 +1,14 @@
-<?php 
-require('../header.php');	 
+<?php
+require('../header.php');
 include('../auth/auth.php');
 
 $user_roles = authenticate(2);
 
 if (array_search('2', $user_roles)) {
 	 echo '
-  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addClient" aria-expanded="false" aria-controls="collapseExample">Add Client</button> 
+  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addClient" aria-expanded="false" aria-controls="collapseExample">Add Client</button>
 	<div id="addClient" class="collapse">
-	<form method="POST" action="https://anothercrmbeta.connorpeoples.com/clients/add.php">
+	<form method="POST" action="' . $ROOT_URL . 'clients/add.php">
 	    <div class="form-group">
 	      <label for="exampleInputEmail1">Client Name</label>
 	      <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="John Doe" name="Name">
@@ -54,7 +54,8 @@ if (array_search('2', $user_roles)) {
 	<div style="width: 80%; margin-left:auto; margin-right:auto;">';
 }
 
-$link = mysqli_connect('127.0.0.1', 'root', 'P4$$word9522007983', 'onDemandJet');
+require('../config.php')
+		$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -70,7 +71,7 @@ $stmt->execute();
 mysqli_stmt_bind_result($stmt, $Name, $Email, $WorkNumber, $HomeNumber, $CellNumber, $StreetAddress, $Suite, $ZipCode, $State, $Agent);
 while ($stmt->fetch()) {
 	echo '
-		<a style="color:black;" href="https://anothercrmbeta.connorpeoples.com/clients/client.php?name=' . $Name . '">
+		<a style="color:black;" href="' . $ROOT_URL . 'clients/client.php?name=' . $Name . '">
 		<div class="card" style="width: 45%; margin:10px; background-color:#ee5; float:left;">
 		  <div class="card-body">
 		    <h5 class="card-title">' . $Name . '</h5>

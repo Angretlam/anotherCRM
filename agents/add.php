@@ -1,8 +1,8 @@
 <?php
 include('../auth/auth.php');
 authenticate(1);
-
-$link = mysqli_connect('127.0.0.1', 'root', 'P4$$word9522007983', 'onDemandJet');
+require('../config.php');
+$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -22,7 +22,7 @@ while ($stmt->fetch()) {
 
 if ($test_agent > 0) {
 	error_log('Argh!');
-	header('Location: https://anothercrmbeta.connorpeoples.com/agents/');
+	header('Location: ' . $ROOT_URL . 'agents/');
 } else {
 	// Sanitize the input and add user to user DB
 	$query = "
@@ -33,7 +33,7 @@ if ($test_agent > 0) {
 			'" .	$link->real_escape_string($_POST["WorkNumber"])	. "',
 			'" .	$link->real_escape_string($_POST["CellNumber"])	. "',
 			'" .	$link->real_escape_string($_POST["HomeNumber"])	. "',
-			'" .	(password_hash($link->real_escape_string($_POST["Password"]), PASSWORD_BCRYPT))	. "')"; 
+			'" .	(password_hash($link->real_escape_string($_POST["Password"]), PASSWORD_BCRYPT))	. "')";
 
 	$stmt = $link->prepare($query);
 	$stmt->execute();
@@ -64,6 +64,6 @@ if ($test_agent > 0) {
 	$stmt3 = $link->prepare($query3);
 	$stmt3->execute();
 
-	header('Location: https://anothercrmbeta.connorpeoples.com/agents/');
+	header('Location: ' . $ROOT_URL . 'agents/');
 }
 ?>

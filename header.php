@@ -32,7 +32,7 @@ require('config.php');
 if (!$_SESSION['authenticated']) {
 
     echo '
-        <form class="form-inline my-2 my-lg-0" method="POST" action="https://anothercrmbeta.connorpeoples.com/auth/index.php">
+        <form class="form-inline my-2 my-lg-0" method="POST" action="' . $ROOT_URL . 'auth/index.php">
           <input class="form-control mr-sm-2" type="text" placeholder="Email" aria-label="Username" name="email">
           <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" name="password">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
@@ -55,7 +55,7 @@ if (!$_SESSION['authenticated']) {
 	</li>-->
 
 		<div class="btn-group" style="margin-left: 10px;">
-		  <a href="https://anothercrmbeta.connorpeoples.com/clients/index.php"><button type="button" class="btn btn-info">Clients</button></a>
+		  <a href="' . $ROOT_URL . 'clients/index.php"><button type="button" class="btn btn-info">Clients</button></a>
 		  <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    <span class="sr-only">Toggle Dropdown</span>
 		  </button>
@@ -74,13 +74,13 @@ if (!$_SESSION['authenticated']) {
                 // Execute the query
                 mysqli_stmt_bind_result($stmt, $name, $id);
                 while ($stmt->fetch()) {
-                       echo '<a class="dropdown-item" href="https://anothercrmbeta.connorpeoples.com/clients/client.php?name=' . $name . '">' . $name . '</a>';
+                       echo '<a class="dropdown-item" href="' . $ROOT_URL . 'clients/client.php?name=' . $name . '">' . $name . '</a>';
                 };
 
 echo '</div>
 		</div>
 		<div class="btn-group" style="margin-left: 10px;">
-		  <a href="https://anothercrmbeta.connorpeoples.com/agents/index.php"><button type="button" class="btn btn-info">Agents</button></a>
+		  <a href="' . $ROOT_URL . 'agents/index.php"><button type="button" class="btn btn-info">Agents</button></a>
 		  <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    <span class="sr-only">Toggle Dropdown</span>
 		  </button>
@@ -104,7 +104,7 @@ echo '</div>
                 // Execute the query
                 mysqli_stmt_bind_result($stmt, $name, $id);
                 while ($stmt->fetch()) {
-                       echo '<a class="dropdown-item" href="https://anothercrmbeta.connorpeoples.com/agents/agent.php?name=' . $name . '">' . $name . '</a>';
+                       echo '<a class="dropdown-item" href="' . $ROOT_URL . 'agents/agent.php?name=' . $name . '">' . $name . '</a>';
                 };
 
 
@@ -113,7 +113,7 @@ echo '</div>
 		</div>
 
         </ul>
-        <form class="form-inline my-2 my-lg-0" method="POST" action="https://anothercrmbeta.connorpeoples.com/auth/logout.php">
+        <form class="form-inline my-2 my-lg-0" method="POST" action="' . $ROOT_URL . 'auth/logout.php">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
         </form>';
 }

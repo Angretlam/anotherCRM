@@ -1,6 +1,5 @@
 <?php
 session_start();
-require('../config.php')
 // Access current session, retrieve email. If no email, redirect to home page.
 
 function authenticate ($required_role) {
@@ -8,7 +7,7 @@ function authenticate ($required_role) {
 		/*
 		  Retrieve user information from database. Roles.
 		*/
-
+require('../config.php')
 		$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 		if (!$link) {
@@ -39,12 +38,12 @@ function authenticate ($required_role) {
 		};
 
 		if (!array_search($required_role, $roles)) {
-			header('Location: https://anothercrmbeta.connorpeoples.com/crm');
+			header('Location: ' . $ROOT_URL . 'crm');
 		}
 
 		return($roles);
 	} else {
-		header('Location: https://anothercrmbeta.connorpeoples.com/');
+		header('Location: ' . $ROOT_URL . '');
 	}
 }
 

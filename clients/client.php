@@ -1,10 +1,10 @@
-<?php 
-require('../header.php');	 
+<?php
+require('../header.php');
 include('../auth/auth.php');
 
 authenticate(2);
-
-$link = mysqli_connect('127.0.0.1', 'root', 'P4$$word9522007983', 'onDemandJet');
+require('../config.php')
+		$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -18,14 +18,14 @@ $stmt = $link->prepare($query);
 $stmt->execute();
 mysqli_stmt_bind_result($stmt, $ClientID, $Name, $Email, $WorkNumber, $HomeNumber, $CellNumber, $StreetAddress, $Suite, $ZipCode, $State);
 while ($stmt->fetch()) {
-	 
+
 echo '<h4>Client: ' . $Name . '</h4>
-  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Client Info</button> 
-  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addNotes" aria-expanded="false" aria-controls="collapseExample">Add Note</button> 
-  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addRelation" aria-expanded="false" aria-controls="collapseExample">Agent Info</button> 
-  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Client Status</button> 
+  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Client Info</button>
+  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addNotes" aria-expanded="false" aria-controls="collapseExample">Add Note</button>
+  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addRelation" aria-expanded="false" aria-controls="collapseExample">Agent Info</button>
+  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Client Status</button>
         <div id="addAgent" class="collapse">
-	<form method="POST" action="https://anothercrmbeta.connorpeoples.com/clients/update.php">
+	<form method="POST" action="' . $ROOT_URL . 'clients/update.php">
 		<input type="hidden" name="Name" value="' . $Name . '">
             <div class="form-group">
               <label for="exampleInputEmail1">Client Name</label>
@@ -68,7 +68,7 @@ echo '<h4>Client: ' . $Name . '</h4>
 	</div>
 
 	<div id="addNotes" class="collapse">
-		<form method="POST" action="https://anothercrmbeta.connorpeoples.com/clients/notes.php">
+		<form method="POST" action="' . $ROOT_URL . 'clients/notes.php">
 		    <div class="form-group">
 		      <label for="exampleInputEmail1">Notes</label>
 		    		<textarea name="Note" rows="4" style="width: 100%; margin-left: auto; margin-right: auto;"></textarea>
@@ -82,7 +82,7 @@ echo '<h4>Client: ' . $Name . '</h4>
 
  echo '
         <div id="addRelation" class="collapse">
-	<form method="POST" action="https://anothercrmbeta.connorpeoples.com/clients/relations.php">
+	<form method="POST" action="' . $ROOT_URL . 'clients/relations.php">
 		<input type="hidden" name="ClientID" value="' . $ClientID . '">
 			<input type="hidden" name="Name" value="'. $Name .'">
             <div class="form-group">
@@ -112,7 +112,7 @@ echo '<h4>Client: ' . $Name . '</h4>
 			echo '<option value="'. $agentID .'">'. $agentName .'</option>';
 		}
 	}
-	
+
 
  echo '</select><br /><br />
                         <button type="submit" class="btn btn-info">Update</button>
@@ -120,7 +120,7 @@ echo '<h4>Client: ' . $Name . '</h4>
         </div>
         </form>
         <div id="addStatus" class="collapse">
-        <form method="POST" action="https://anothercrmbeta.connorpeoples.com/clients/status.php">
+        <form method="POST" action="' . $ROOT_URL . 'clients/status.php">
                 <input type="hidden" name="ClientID" value="' . $ClientID . '">
                         <input type="hidden" name="Name" value="'. $Name .'">
             <div class="form-group">

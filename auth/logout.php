@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_destroy();
-header('Location: https://anothercrmbeta.connorpeoples.com/');
+header('Location: ' . $ROOT_URL . '');
 ?>

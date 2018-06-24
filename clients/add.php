@@ -1,8 +1,8 @@
 <?php
 include('../auth/auth.php');
 authenticate(2);
-
-$link = mysqli_connect('127.0.0.1', 'root', 'P4$$word9522007983', 'onDemandJet');
+require('../config.php')
+		$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -24,7 +24,7 @@ $zipcode = $_POST["Zipcode"] ? $link->real_escape_string($_POST["Zipcode"]) : ' 
 
 if ($test_agent > 0) {
 	error_log('Argh!');
-	header('Location: https://anothercrmbeta.connorpeoples.com/clients/');
+	header('Location: ' . $ROOT_URL . 'clients/');
 } else {
 	// Sanitize the input and add user to user DB
 	$query = "
@@ -62,7 +62,7 @@ if ($test_agent > 0) {
 	$stmt = $link->prepare($query);
 	$stmt->execute();
 
-	header('Location: https://anothercrmbeta.connorpeoples.com/clients/');
-	
+	header('Location: ' . $ROOT_URL . 'clients/');
+
 }
 ?>

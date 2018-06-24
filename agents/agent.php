@@ -7,7 +7,8 @@ include('../auth/auth.php');
 $user_roles = authenticate(2);
 
 // Connect to the database
-$link = mysqli_connect('127.0.0.1', 'root', 'P4$$word9522007983', 'onDemandJet');
+require('../config.php');
+$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -33,7 +34,7 @@ while ($stmt->fetch()) {
     // Create the Agent information form.
     echo '
         <div id="addAgent" class="collapse">
-          <form method="POST" action="https://anothercrmbeta.connorpeoples.com/agents/update.php">
+          <form method="POST" action="' . $ROOT_URL . 'agents/update.php">
               <input type="hidden" name="Name" value="' . $Name . '">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Agent Name</label>
@@ -66,7 +67,7 @@ if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
   echo '
       </form>
       <div id="addStatus" class="collapse">
-      <form method="POST" action="https://anothercrmbeta.connorpeoples.com/agents/standings.php">
+      <form method="POST" action="' . $ROOT_URL . 'agents/standings.php">
           <input type="hidden" name="AgentID" value="' . $AgentID . '">
           <input type="hidden" name="Name" value="' . $Name . '">
           <div class="form-group">
@@ -77,7 +78,7 @@ if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
   echo '
       </form>
       <div id="addStatus" class="collapse">
-      <form method="POST" action="https://anothercrmbeta.connorpeoples.com/agents/standings.php">
+      <form method="POST" action="' . $ROOT_URL . 'agents/standings.php">
           <input type="hidden" name="AgentID" value="' . $AgentID . '">
           <input type="hidden" name="Name" value="' . $Name . '">
           <div class="form-group">
@@ -147,7 +148,7 @@ while ($stmt->fetch()) {
 
 	echo'
 	  <div class="card" style="width: 40%; margin-bottom:10px; margin-left:auto; margin-right:auto;">
-      <a href="https://anothercrmbeta.connorpeoples.com/clients/client.php?name=' . $ClientName . '">
+      <a href="' . $ROOT_URL . 'clients/client.php?name=' . $ClientName . '">
         <div class="card-body">
   	      <h6 class="card-title">'. $ClientName .'</h6>
         </div>
