@@ -70,8 +70,7 @@ echo '
         <div class="form-group">
             <br />
             <label>Client Status</label>
-            <select class="custom-select" name="StandingID">
-            <option value="">None</option>';
+            <select class="custom-select" name="StandingID">';
 
 // Get the agent status
 $agent = '';
