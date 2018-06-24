@@ -75,7 +75,7 @@ echo '
 
 // Get the agent status
 $agent = '';
-$query = "SELECT (SELECT StandingName from Standings where StandingID = AgentStanding.StandingID) AS AStanding FROM AgentStandings WHERE AgentID =" . $AgentID;
+$query = "SELECT (SELECT StandingName from Standings where StandingID = AgentStandings.StandingID) AS AStanding FROM AgentStandings WHERE AgentID =" . $AgentID;
 $stmt  = $link->prepare($query);
 error_log($AgentID);
 $stmt->execute();
