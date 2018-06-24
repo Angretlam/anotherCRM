@@ -62,9 +62,11 @@ if (!$_SESSION['authenticated']) {
 
                 $query = "
                         SELECT
-                                Clients.Name, Clients.ClientID
+                            Clients.Name, Clients.ClientID
                         FROM
-                             Clients";
+                            Clients
+                        ORDER BY
+                            Name";
                 $stmt = $link->prepare($query);
                 $stmt->execute();
 
@@ -88,9 +90,13 @@ echo '</div>
                 $query = "
                         SELECT
                         	Agents.Name, Agents.AgentID
-			FROM
-                             Agents
-			WHERE AGENTID != 1";
+			                  FROM
+                          Agents
+			                  WHERE
+                          AGENTID != 1
+                        ORDER BY
+                          Name
+                        ";
                 $stmt = $link->prepare($query);
                 $stmt->execute();
 
