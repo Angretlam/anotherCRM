@@ -108,7 +108,10 @@ echo ' </select><br /><br />
     </form>
       <!-- HEre in end the test code stuff -->
     </div>
-      </div>';
+      </div>
+
+
+    <div>';
 
 // Add the clients related to this agent.
 $query = "SELECT (SELECT Name FROM Clients WHERE ClientID = Relations.ClientID) as ClientName FROM Relations WHERE AgentID = ". $AgentID . " Order BY ClientName";
@@ -125,6 +128,8 @@ while ($stmt->fetch()) {
       </div>
 	  </div>';
 }
+
+echo '</div>';
 
 require('../footer.php');
 ?>
