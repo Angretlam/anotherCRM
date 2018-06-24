@@ -1,12 +1,12 @@
-<?php 
-require('../header.php');	 
+<?php
+require('../header.php');
 include('../auth/auth.php');
 
 $user_roles = authenticate(2);
 
 if (array_search('1', $user_roles)) {
 	 echo '
-  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Add Agent</button> 
+  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Add Agent</button>
 	<div id="addAgent" class="collapse">
 	<form method="POST" action="https://anothercrmbeta.connorpeoples.com/agents/add.php">
 	    <div class="form-group">
@@ -62,15 +62,17 @@ mysqli_stmt_bind_result($stmt, $Name, $Email, $WorkNumber, $CellNumber, $HomeNum
 while ($stmt->fetch()) {
 	echo '
 		<div class="card" style="width: 45%; margin:10px; float:left;">
-		  <div class="card-body">
-		    <h5 class="card-title">' . $Name . '</h5>
-		    <ul>
-		      <li>Contact Email: ' . $Email . ' </li>
-		      <li>Work Phone: ' . $WorkNumber . ' </li>
-		      <li>Cell Phone: ' . $CellNumber . ' </li>
-		      <li>Home Phone: ' . $HomeNumber . ' </li>
-		    <ul>
-		  </div>
+			<a href="https://anothercrmbeta.connorpeoples.com/agents/agent.php?name=' . $Name . '">
+			  <div class="card-body">
+			    <h5 class="card-title">' . $Name . '</h5>
+			    <ul>
+			      <li>Contact Email: ' . $Email . ' </li>
+			      <li>Work Phone: ' . $WorkNumber . ' </li>
+			      <li>Cell Phone: ' . $CellNumber . ' </li>
+			      <li>Home Phone: ' . $HomeNumber . ' </li>
+			    <ul>
+			  </div>
+			</a>
 		</div>
 
 	';
