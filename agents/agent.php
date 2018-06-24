@@ -64,7 +64,7 @@ while ($stmt->fetch()) {
 echo '
     </form>
     <div id="addStatus" class="collapse">
-    <form method="POST" action="https://anothercrmbeta.connorpeoples.com/clients/status.php">
+    <form method="POST" action="https://anothercrmbeta.connorpeoples.com/agents/standings.php">
         <input type="hidden" name="AgentID" value="' . $AgentID . '">
         <input type="hidden" name="Name" value="' . $Name . '">
         <div class="form-group">
