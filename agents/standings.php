@@ -12,20 +12,20 @@ if (!$link) {
 }
 
 
-$AgentID = $link->real_escape_string($_POST["AgentID"]);
+$StandingID = $link->real_escape_string($_POST["StandingID"]);
 
-if (!$agent) {
-	$agent = 'NULL';
+if (!$StandingID) {
+	$StandingID = 'NULL';
 }
 
-error_log($agent);
+error_log($StandingID);
 // Sanitize the input and add user to user DB
 $query = "
-	UPDATE AgentStandings SET StandingID = " . $AgentID . "
+	UPDATE AgentStandings SET StandingID = " . $StandingID . "
 	WHERE AgentID = '". $link->real_escape_string($_POST["AgentID"]) ."'";
 
 $stmt = $link->prepare($query);
 $stmt->execute();
 
-header('Location: https://anothercrmbeta.connorpeoples.com/agents/agent.php?name=' . $_POST["Name"]);
+header('Location: https://anothercrmbeta.connorpeoples.com/clients/client.php?name=' . $_POST["Name"]);
 ?>
