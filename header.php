@@ -58,9 +58,7 @@ if (!$_SESSION['authenticated']) {
 		  <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    <span class="sr-only">Toggle Dropdown</span>
 		  </button>
-		  <div class="dropdown-menu">
-		    <a class="dropdown-item" href="https://anothercrmbeta.connorpeoples.com/agents/add.php">Add Client</a>
-		    <div class="dropdown-divider"></div>';
+		  <div class="dropdown-menu">';
 
                 $query = "
                         SELECT
@@ -83,9 +81,7 @@ echo '</div>
 		  <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    <span class="sr-only">Toggle Dropdown</span>
 		  </button>
-		  <div class="dropdown-menu">
-		    <a class="dropdown-item" href="https://anothercrmbeta.connorpeoples.com/agents/index.php">Add Agent</a>
-		    <div class="dropdown-divider"></div>';
+		  <div class="dropdown-menu">';
 
 
                 // Sanitize the input
