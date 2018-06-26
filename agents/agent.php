@@ -127,7 +127,7 @@ echo ' </select><br /><br />
         <input type="hidden" name="Name" value="' . $Name . '">
         <div class="form-group">
             <label>New Password</label>
-            <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="" name="passwd">
+            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="" name="passwd">
           ';
 
 
