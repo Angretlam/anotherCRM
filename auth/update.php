@@ -24,7 +24,7 @@
 		// Get the user roles information from the database
 		$query = "
 			UPDATE
-				AGENTS
+				Agents
 			SET
         Password = '" . $dbPasswd . "'
 			WHERE
