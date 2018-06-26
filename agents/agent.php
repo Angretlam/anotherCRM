@@ -31,7 +31,7 @@ while ($stmt->fetch()) {
     <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Agent Info</button>
     <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Agent Status</button>';
 
-    if (array_search($user_roles, 1)) {
+    if (array_search('1', $user_roles)) {
       echo '  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#updatePassword" aria-expanded="false" aria-controls="collapseExample">Agent Password</button>';
     }
     // Create the Agent information form.
