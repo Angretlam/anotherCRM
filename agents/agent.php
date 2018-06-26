@@ -150,7 +150,7 @@ if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
 
 }
 
-echo '</div> <h4>Client list:</h4>';
+echo '</div> </div> <div class="container"> <h4>Client list:</h4>';
 
 // Add the clients related to this agent.
 $query = "SELECT (SELECT Name FROM Clients WHERE ClientID = Relations.ClientID) as ClientName FROM Relations WHERE AgentID = ". $AgentID . " Order BY ClientName";
@@ -170,6 +170,7 @@ while ($stmt->fetch()) {
 	  </div>';
 }
 
+echo '</div>';
 
 require('../footer.php');
 ?>
