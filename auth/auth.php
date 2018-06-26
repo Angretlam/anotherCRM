@@ -1,12 +1,13 @@
 <?php
 session_start();
+
+require('../config.php');
 // Access current session, retrieve email. If no email, redirect to home page.
 function authenticate ($required_role) {
 	if ($_SESSION['email']) {
 		/*
 		  Retrieve user information from database. Roles.
 		*/
-		require('../config.php');
 		$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
 		if (!$link) {
