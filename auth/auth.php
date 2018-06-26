@@ -36,7 +36,7 @@ function authenticate ($required_role) {
 		mysqli_stmt_bind_result($stmt, $hashed_pws);
 		while ($stmt->fetch()) {
 			array_push($roles, $hashed_pws);
-		};
+		}
 
 		if (!array_search($required_role, $roles)) {
 			header('Location: ' . $ROOT_URL . 'crm');
