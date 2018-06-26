@@ -22,7 +22,7 @@ function authenticate ($required_role) {
 		// Get the user roles information from the database
 		$query = "
 			SELECT
-				Auth.RoleID, Agents.Name
+				Auth.RoleID
 			FROM
 			     Auth
 			     INNER JOIN Agents on Agents.AgentID = Auth.AgentID
@@ -33,10 +33,9 @@ function authenticate ($required_role) {
 
 		$roles = ['roles'];
 		// Execute the query
-		mysqli_stmt_bind_result($stmt, $hashed_pws, $name);
+		mysqli_stmt_bind_result($stmt, $hashed_pws);
 		while ($stmt->fetch()) {
 			array_push($roles, $hashed_pws);
-			array_push($roles, $name);
 		};
 
 		if (!array_search($required_role, $roles)) {

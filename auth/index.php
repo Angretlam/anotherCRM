@@ -43,5 +43,5 @@ if (password_verify($password, $hashed_pws)) {
 
 mysqli_close($link);
 
-header('Location: ' . $ROOT_URL . '/agents/agent.php?name=' . $name );
+header('Location: ' . $ROOT_URL . 'agents/agent.php?name=' . $name );
 ?>
