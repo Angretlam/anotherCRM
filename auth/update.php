@@ -17,7 +17,7 @@
 		// Sanitize the input
 		$AgentID = $link->real_escape_string($_POST['AgentID']);
     $passwd = $link->real_escape_string($_POST['passwd']);
-
+    $email = $link->real_escape_string($_SESSION['email']);
     // Re-Crypt the password
     $dbPasswd = password_hash($AgentID, PASSWORD_BCRYPT);
 
