@@ -22,12 +22,12 @@ if (!$link) {
 
 // Sanitize the input
 $email = $link->real_escape_string($email);
-$query = "SELECT Password FROM Agents WHERE email = '" . $email . "'";
+$query = "SELECT Password, Name FROM Agents WHERE email = '" . $email . "'";
 $stmt = $link->prepare($query);
 $stmt->execute();
 
 // Execute the query
-mysqli_stmt_bind_result($stmt, $hashed_pws);
+mysqli_stmt_bind_result($stmt, $hashed_pws, $name);
 $hashed_pw = $stmt->fetch();
 
 // Verify the PW withe BCRYPT
@@ -43,5 +43,5 @@ if (password_verify($password, $hashed_pws)) {
 
 mysqli_close($link);
 
-header('Location: ' . $ROOT_URL . '');
+header('Location: ' . $ROOT_URL . '/agents/agent.php?name=' . $name );
 ?>

@@ -39,8 +39,6 @@ function authenticate ($required_role) {
 			array_push($roles, $name);
 		};
 
-		error_log(print_r($roles));
-
 		if (!array_search($required_role, $roles)) {
 			header('Location: ' . $ROOT_URL . 'crm');
 		}
