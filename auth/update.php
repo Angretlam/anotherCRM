@@ -30,7 +30,7 @@
 			SET
         Password = '" . $dbPasswd . "'
 			WHERE
-			     Agents.Email = '" . $email . "'";
+			     Agents.AgentID = '" . $AgentID . "'";
 		$stmt = $link->prepare($query);
 		$stmt->execute();
 

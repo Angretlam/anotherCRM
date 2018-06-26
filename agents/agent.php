@@ -136,7 +136,7 @@ echo ' </select><br /><br />
 // Close the form
 if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
   echo '
-                      <button type="submit" class="btn btn-info">Update</button>
+                      <button type="submit" class="btn btn-info">Update Password</button>
       </div>
       </div>
       </form>
