@@ -3,6 +3,8 @@
   require('auth.php');
   authenticate(1);
 
+  require('../config.php');
+
   if ($_SESSION['email']) {
     // connect to the DB
 		$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
