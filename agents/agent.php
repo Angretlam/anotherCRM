@@ -124,7 +124,7 @@ echo ' </select><br /><br />
     </div>
     </form>
     <div id="updatePassword" class="collapse">
-    <form method="POST" action="' . $ROOT_URL . 'agents/update.php">
+    <form method="POST" action="' . $ROOT_URL . 'auth/update.php">
         <input type="hidden" name="AgentID" value="' . $AgentID . '">
         <input type="hidden" name="Name" value="' . $Name . '">
         <div class="form-group">
