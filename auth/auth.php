@@ -1,9 +1,10 @@
 <?php
 session_start();
 
-require('../config.php');
+
 // Access current session, retrieve email. If no email, redirect to home page.
 function authenticate ($required_role) {
+	require('../config.php');
 	if ($_SESSION['email']) {
 		/*
 		  Retrieve user information from database. Roles.
