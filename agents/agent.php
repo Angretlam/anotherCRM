@@ -29,7 +29,8 @@ while ($stmt->fetch()) {
     // Create the header buttons for the agent page.
     echo '<h4>Agent: ' . $Name . '</h4>
     <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Agent Info</button>
-    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Agent Status</button>';
+    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Agent Status</button>
+    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Agent Password</button>';
 
     // Create the Agent information form.
     echo '
@@ -114,9 +115,25 @@ while ($stmt->fetch()) {
     }
 }
 
+// Create agent password change form.
+echo ' </select><br /><br />
+                    <button type="submit" class="btn btn-info">Update</button>
+    </div>
+    </div>
+    </form>
+    <div id="addStatus" class="collapse">
+    <form method="POST" action="' . $ROOT_URL . 'agents/update.php">
+        <input type="hidden" name="AgentID" value="' . $AgentID . '">
+        <input type="hidden" name="Name" value="' . $Name . '">
+        <div class="form-group">
+            <label>New Password</label>
+            <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="" name="passwd">
+          ';
+
+
 // Close the form
 if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
-  echo ' </select><br /><br />
+  echo '
                       <button type="submit" class="btn btn-info">Update</button>
       </div>
       </div>
