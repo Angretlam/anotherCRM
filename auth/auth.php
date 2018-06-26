@@ -39,9 +39,10 @@ function authenticate ($required_role) {
 		}
 
 		if (!array_search($required_role, $roles)) {
-			header('Location: ' . $ROOT_URL . 'crm');
+			header('Location: ' . $ROOT_URL . '');
 		}
 
+		error_log("weoirusldkjf");
 		return($roles);
 	} else {
 		header('Location: ' . $ROOT_URL . '');
