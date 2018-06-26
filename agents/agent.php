@@ -30,7 +30,7 @@ while ($stmt->fetch()) {
     echo '<h4>Agent: ' . $Name . '</h4>
     <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Agent Info</button>
     <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Agent Status</button>
-    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Agent Password</button>';
+    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#updatePassword" aria-expanded="false" aria-controls="collapseExample">Agent Password</button>';
 
     // Create the Agent information form.
     echo '
@@ -121,7 +121,7 @@ echo ' </select><br /><br />
     </div>
     </div>
     </form>
-    <div id="addStatus" class="collapse">
+    <div id="updatePassword" class="collapse">
     <form method="POST" action="' . $ROOT_URL . 'agents/update.php">
         <input type="hidden" name="AgentID" value="' . $AgentID . '">
         <input type="hidden" name="Name" value="' . $Name . '">
