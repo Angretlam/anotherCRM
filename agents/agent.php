@@ -140,22 +140,17 @@ if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
       </div>
       </div>
       </form>
-        <!-- HEre in end the test code stuff -->
-      </div>
-        </div>';
+        <!-- HEre in end the test code stuff -->';
 } else {
   echo ' </select><br /><br />
       </div>
       </div>
       </form>
-        <!-- HEre in end the test code stuff -->
-      </div>
-        </div>';
+        <!-- HEre in end the test code stuff -->';
 
 }
 
-echo '<div style="width:80%; margin-left:auto; margin-right:auto;">
-      <h4>Client list:</h4>';
+echo '<h4>Client list:</h4>';
 
 // Add the clients related to this agent.
 $query = "SELECT (SELECT Name FROM Clients WHERE ClientID = Relations.ClientID) as ClientName FROM Relations WHERE AgentID = ". $AgentID . " Order BY ClientName";
@@ -175,7 +170,6 @@ while ($stmt->fetch()) {
 	  </div>';
 }
 
-echo '</div>';
 
 require('../footer.php');
 ?>
