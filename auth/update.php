@@ -21,7 +21,7 @@
     $passwd = $link->real_escape_string($_POST['passwd']);
     $email = $link->real_escape_string($_SESSION['email']);
     // Re-Crypt the password
-    $dbPasswd = password_hash($AgentID, PASSWORD_BCRYPT);
+    $dbPasswd = password_hash($passwd, PASSWORD_BCRYPT);
 
 		// Get the user roles information from the database
 		$query = "
