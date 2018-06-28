@@ -2,7 +2,7 @@
 require('../header.php');
 include('../auth/auth.php');
 
-authenticate(2);
+$user_roles = authenticate(2);
 require('../config.php');
 		$link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
@@ -20,11 +20,18 @@ mysqli_stmt_bind_result($stmt, $ClientID, $Name, $Email, $WorkNumber, $HomeNumbe
 while ($stmt->fetch()) {
 
 echo '<h4>Client: ' . $Name . '</h4>
-  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Client Info</button>
-  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addNotes" aria-expanded="false" aria-controls="collapseExample">Add Note</button>
-  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addRelation" aria-expanded="false" aria-controls="collapseExample">Agent Info</button>
-  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Client Status</button>
-        <div id="addAgent" class="collapse">
+  <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Client Info</button>
+  <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#addNotes" aria-expanded="false" aria-controls="collapseExample">Add Note</button>
+  <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#addRelation" aria-expanded="false" aria-controls="collapseExample">Agent Info</button>
+  <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Client Status</button>';
+
+
+if (array_search("1", $user_roles)) {
+	echo '
+		<button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#deleteClient" aria-expanded="false" aria-controls="collapseExample">Delete Client</button>';
+}
+
+echo '<div id="addAgent" class="collapse">
 	<form method="POST" action="' . $ROOT_URL . 'clients/update.php">
 		<input type="hidden" name="Name" value="' . $Name . '">
             <div class="form-group">
@@ -63,7 +70,7 @@ echo '<h4>Client: ' . $Name . '</h4>
               <label for="exampleInputEmail1">State</label>
               <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="'. $State .'" name="State">
             </div>
-            <button type="submit" class="btn btn-info">Update</button>
+            <button type="submit" class="btn btn-warning">Update</button>
           </form>
 	</div>
 
@@ -75,7 +82,7 @@ echo '<h4>Client: ' . $Name . '</h4>
 			</div>
 			<input type="hidden" name="ClientID" value="'. $ClientID .'">
 			<input type="hidden" name="Name" value="'. $Name .'">
-            		<button type="submit" class="btn btn-info">Update</button>
+            		<button type="submit" class="btn btn-warning">Update</button>
 		</form>
 	</div>';
 }
@@ -115,7 +122,7 @@ echo '<h4>Client: ' . $Name . '</h4>
 
 
  echo '</select><br /><br />
-                        <button type="submit" class="btn btn-info">Update</button>
+                        <button type="submit" class="btn btn-warning">Update</button>
         </div>
         </div>
         </form>
@@ -153,10 +160,20 @@ echo '<h4>Client: ' . $Name . '</h4>
 
 
 echo ' </select><br /><br />
-            		<button type="submit" class="btn btn-info">Update</button>
+            		<button type="submit" class="btn btn-warning">Update</button>
 	</div>
 	</div>
 	</form>
+	
+	 <div id="deleteClient" class="collapse">
+        	<form method="POST" action="' . $ROOT_URL . 'clients/delete.php">
+                	<input type="hidden" name="clientID" value="' . $ClientID . '">
+                        <input type="hidden" name="Name" value="'. $Name .'">
+			<br />
+			<br />
+			<button type="submit" class="btn btn-danger">Confirm Deletion</button>
+		</form>
+	</div>
 	  <!-- HEre in end the test code stuff -->
 	</div>
       </div>

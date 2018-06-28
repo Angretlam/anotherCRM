@@ -19,8 +19,8 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">On Demand Jet CRM BETA</a>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #aaa; max-height:60px;">
+      <a class="navbar-brand" href="#"><img src="https://crm.gandywong.com/crmLogo.png" style="max-height:50px;" alt="onDemandJet Logo" /></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -51,12 +51,12 @@ if (!$_SESSION['authenticated']) {
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto"><!--
           <li class="nav-item active">
-        	<a class="btn btn-info" href="#" role="button">Dashboard</a>
+        	<a class="btn btn-success" href="#" role="button">Dashboard</a>
 	</li>-->
 
 		<div class="btn-group" style="margin-left: 10px;">
-		  <a href="' . $ROOT_URL . 'clients/index.php"><button type="button" class="btn btn-info">Clients</button></a>
-		  <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  <a href="' . $ROOT_URL . 'clients/index.php"><button type="button" class="btn btn-success">Clients</button></a>
+		  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    <span class="sr-only">Toggle Dropdown</span>
 		  </button>
 		  <div class="dropdown-menu">';
@@ -80,8 +80,8 @@ if (!$_SESSION['authenticated']) {
 echo '</div>
 		</div>
 		<div class="btn-group" style="margin-left: 10px;">
-		  <a href="' . $ROOT_URL . 'agents/index.php"><button type="button" class="btn btn-info">Agents</button></a>
-		  <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  <a href="' . $ROOT_URL . 'agents/index.php"><button type="button" class="btn btn-success">Agents</button></a>
+		  <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    <span class="sr-only">Toggle Dropdown</span>
 		  </button>
 		  <div class="dropdown-menu">';
@@ -110,9 +110,8 @@ echo '</div>
 
 	echo '
 		  </div>
-		</div>
-
         </ul>
+	 <button class="btn btn-success" style="margin-right:10px;" disabled>' . $_SESSION["email"] . '</button>
         <form class="form-inline my-2 my-lg-0" method="POST" action="' . $ROOT_URL . 'auth/logout.php">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
         </form>';

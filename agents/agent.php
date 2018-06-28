@@ -28,13 +28,17 @@ mysqli_stmt_bind_result($stmt, $AgentID, $Name, $Email, $WorkNumber, $HomeNumber
 while ($stmt->fetch()) {
     // Create the header buttons for the agent page.
     echo '<h4>Agent: ' . $Name . '</h4>
-    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Agent Info</button>
-    <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Agent Status</button>';
+    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#addAgent" aria-expanded="false" aria-controls="collapseExample">Agent Info</button>
+    <button class="btn btn-warning" type="button" data-toggle="collapse" data-target="#addStatus" aria-expanded="false" aria-controls="collapseExample">Agent Status</button>';
 
     if (array_search('1', $user_roles)) {
-      echo '  <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#updatePassword" aria-expanded="false" aria-controls="collapseExample">Agent Password</button>';
+      echo '  
+	<button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#updatePassword" aria-expanded="false" aria-controls="collapseExample">Agent Password</button>
+	<button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#deleteAgent" aria-expanded="false" aria-controls="collapseExample">Delete Agent</button>
+
+	';
     }
-    // Create the Agent information form.
+    // Create the Agent warningrmation form.
     echo '
         <div id="addAgent" class="collapse">
           <form method="POST" action="' . $ROOT_URL . 'agents/update.php">
@@ -59,7 +63,7 @@ while ($stmt->fetch()) {
                     <label for="exampleInputEmail1">Home Number</label>
                     <input type="input" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="' . $HomeNumber . '" name="HomeNumber">
                   </div>
-                  <button type="submit" class="btn btn-info">Update</button>
+                  <button type="submit" class="btn btn-warning">Update</button>
                 </form>
           </div>' ;
 }
@@ -119,7 +123,7 @@ while ($stmt->fetch()) {
 
 // Create agent password change form.
 echo ' </select><br /><br />
-                    <button type="submit" class="btn btn-info">Update</button>
+                    <button type="submit" class="btn btn-warning">Update</button>
     </div>
     </div>
     </form>
@@ -136,7 +140,8 @@ echo ' </select><br /><br />
 // Close the form
 if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
   echo '
-                      <button type="submit" class="btn btn-info">Update Password</button>
+	<br />
+        <button type="submit" class="btn btn-danger">Update Password</button>
       </div>
       </div>
       </form>
@@ -150,7 +155,17 @@ if (array_search('1', $user_roles) or $_SESSION["email"] == $Email) {
 
 }
 
-echo '</div> </div> <div class="container"> <h4>Client list:</h4>';
+echo '
+         <div id="deleteAgent" class="collapse">
+                <form method="POST" action="' . $ROOT_URL . 'agents/delete.php">
+                        <input type="hidden" name="agentID" value="' . $AgentID . '">
+                        <br />
+                        <br />
+                        <button type="submit" class="btn btn-danger">Confirm Deletion</button>
+                </form>
+        </div>
+
+</div> </div> <div class="container"> <h4>Client list:</h4>';
 
 // Add the clients related to this agent.
 $query = "SELECT (SELECT Name FROM Clients WHERE ClientID = Relations.ClientID) as ClientName FROM Relations WHERE AgentID = ". $AgentID . " Order BY ClientName";
