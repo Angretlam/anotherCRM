@@ -1,0 +1,319 @@
+-- MySQL dump 10.13  Distrib 5.7.25, for Linux (x86_64)
+--
+-- Host: localhost    Database: onDemandJet
+-- ------------------------------------------------------
+-- Server version	5.7.25-0ubuntu0.16.04.2
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `AgentStandings`
+--
+
+DROP TABLE IF EXISTS `AgentStandings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `AgentStandings` (
+  `AgentStandingID` int(11) NOT NULL AUTO_INCREMENT,
+  `AgentID` int(11) NOT NULL,
+  `StandingID` int(11) NOT NULL,
+  PRIMARY KEY (`AgentStandingID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AgentStandings`
+--
+
+LOCK TABLES `AgentStandings` WRITE;
+/*!40000 ALTER TABLE `AgentStandings` DISABLE KEYS */;
+INSERT INTO `AgentStandings` VALUES (2,72,1),(3,70,1),(4,73,1),(5,1,1);
+/*!40000 ALTER TABLE `AgentStandings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Agents`
+--
+
+DROP TABLE IF EXISTS `Agents`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Agents` (
+  `AgentID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(50) NOT NULL,
+  `Initialized` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Email` varchar(50) NOT NULL,
+  `WorkNumber` text,
+  `CellNumber` text,
+  `HomeNumber` text,
+  `Password` text NOT NULL,
+  PRIMARY KEY (`AgentID`),
+  UNIQUE KEY `Email` (`Email`)
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Agents`
+--
+
+LOCK TABLES `Agents` WRITE;
+/*!40000 ALTER TABLE `Agents` DISABLE KEYS */;
+INSERT INTO `Agents` VALUES (1,'Admin','2018-06-16 00:00:00','Peoples.connor@gmail.com','6126362057',NULL,NULL,'$2y$10$/nrRyjveV55/Op533TIBfOpsfB7MTfbQ3JGwBcsFow8bRspjjqZfy'),(70,'Gandy Wong','2018-06-19 04:05:28','GandyWong@Yahoo.com','','952-200-7983','','$2y$10$YSNxu21HkZnE7CajYiW6o.gI2/7coChACV2tS/ZgItwapYi.tHlyq'),(72,'Erik Nockleby','2018-06-19 10:48:23','erik.minnesotaicemenbaseball@gmail.com','1-855-453-8669','1-651-285-4884','','$2y$10$7YQSizv1.4nmi1ozI96I5eFWUp./f83bft5VSAhvjojv9Tl94G7yq'),(73,'Anthony Rigsby','2018-06-19 10:53:51','info@ondemandjet.net','1-855-453-8669','1-605-690-0304','','$2y$10$1dTnvGfZcoxeqUW5xPbgn.dKGWiTxyXv0D3sH3YXx6Yf7jDhBiHpq'),(79,'Jason Gillen','2018-06-27 01:20:03','gillenjason@gmail.com','16124812597','16124812597','','$2y$10$QkWFXkUKNoiloK6DlepdROL3v/eslqS9H3TJbul6eRrrydU7GsoQG'),(81,'Brandon Johnson','2018-06-28 09:42:24','brandon@ondemandjet.net','1-855-453-8669','1-763-458-2822','brandon@ondemandjet.net','$2y$10$vae4AeDT/KK75l5FhH3iKeLa5/gMxvmE6hqY4tcknt4iHu.n8yUk6');
+/*!40000 ALTER TABLE `Agents` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Auth`
+--
+
+DROP TABLE IF EXISTS `Auth`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Auth` (
+  `AuthID` int(11) NOT NULL AUTO_INCREMENT,
+  `AgentID` int(11) NOT NULL,
+  `RoleID` int(11) NOT NULL,
+  PRIMARY KEY (`AuthID`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Auth`
+--
+
+LOCK TABLES `Auth` WRITE;
+/*!40000 ALTER TABLE `Auth` DISABLE KEYS */;
+INSERT INTO `Auth` VALUES (1,1,1),(2,1,2),(19,58,2),(32,70,1),(33,70,2),(34,71,2),(35,72,2),(36,73,2),(37,74,2),(38,75,2),(39,76,1),(40,76,2),(41,77,2),(42,78,2),(43,78,1),(44,77,1),(45,79,2),(46,80,1),(47,80,2),(48,81,1),(49,81,2),(50,82,2);
+/*!40000 ALTER TABLE `Auth` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ClientStatus`
+--
+
+DROP TABLE IF EXISTS `ClientStatus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ClientStatus` (
+  `ClientStatus` int(11) NOT NULL AUTO_INCREMENT,
+  `ClientID` int(11) NOT NULL,
+  `StatusID` int(11) NOT NULL,
+  PRIMARY KEY (`ClientStatus`),
+  UNIQUE KEY `ClientID` (`ClientID`)
+) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ClientStatus`
+--
+
+LOCK TABLES `ClientStatus` WRITE;
+/*!40000 ALTER TABLE `ClientStatus` DISABLE KEYS */;
+INSERT INTO `ClientStatus` VALUES (3,10,0),(4,11,0),(5,12,0),(6,13,0),(7,14,0),(8,15,0),(9,16,0),(11,18,0),(12,19,0),(13,20,0),(14,21,0),(15,22,0),(16,23,0),(17,24,0),(18,25,0),(19,26,0),(20,27,0),(33,40,3),(36,43,0),(37,44,0),(39,46,0),(40,47,0),(41,48,0),(42,49,0),(44,51,0),(46,53,0),(50,61,0),(51,62,0),(52,63,0),(53,64,0),(54,65,0),(55,66,0),(56,67,0),(57,68,0),(58,69,0),(59,70,0),(60,71,0),(61,72,0),(62,73,0),(63,74,0),(64,75,0),(65,76,0),(68,79,0),(69,80,0),(70,81,0),(71,82,0),(72,83,0),(73,84,0),(74,85,0),(75,86,0),(76,87,0),(77,88,0),(78,89,0),(79,90,0),(80,91,0),(82,93,0),(83,94,0);
+/*!40000 ALTER TABLE `ClientStatus` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Clients`
+--
+
+DROP TABLE IF EXISTS `Clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Clients` (
+  `ClientID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(30) NOT NULL,
+  `WorkNumber` varchar(20) DEFAULT NULL,
+  `HomeNumber` varchar(20) DEFAULT NULL,
+  `CellNumber` varchar(20) DEFAULT NULL,
+  `Email` text,
+  `StreetAddress` text,
+  `Suite` text,
+  `Zipcode` int(11) DEFAULT NULL,
+  `State` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`ClientID`),
+  UNIQUE KEY `Name` (`Name`)
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Clients`
+--
+
+LOCK TABLES `Clients` WRITE;
+/*!40000 ALTER TABLE `Clients` DISABLE KEYS */;
+INSERT INTO `Clients` VALUES (10,'Jeff Scislow','','','','','','',NULL,''),(11,'Lisa Miller','','','','','','',NULL,''),(12,'Lynette and Brett Glenna','','','','','','',NULL,''),(13,'Bridget Staberg','','','','','','',NULL,''),(14,'Doug Huseby','','','612-290-4981','','','',NULL,''),(15,'Kevin Melilli','','','954-401-7096','','','',NULL,''),(16,'Bob & Jeanne','262-352-4467','','414-581-0246','','','',NULL,''),(18,'Erin Rehman','','','612-578-3294','','','',NULL,''),(19,'Jay Micholic','','','612-810-6109','','','',NULL,''),(20,'Jim Huseby','','','612-290-3601','','','',NULL,''),(21,'Joe Akar','','305-379-7989','786-797-3333','','','',NULL,''),(22,'Josh Lund','','','612-802-3265','','','',NULL,''),(23,'Kyle Luebeck','','','763-639-1324','','','',NULL,''),(24,'Lynn D\'Ascanio','','','305-481-0772','','','',NULL,''),(25,'Matt schmidt','952-888-1200','','612-919-8280','','','',NULL,''),(26,'Mike Brown','(507) 333-1200','','','','','',NULL,''),(27,'Parker Tinsley','','','952-334-0271','','','',NULL,''),(40,'Ed Mylett','','','','','','',NULL,'CA'),(43,'Victor Mwakilulu','','','757-632-1973','victormwakilulu@gmail.com','','',NULL,''),(44,'Mas','','','','','','',NULL,'MN'),(46,'Bob Lux','','','','','','',NULL,''),(47,'Azure Dodson','','','8327527734','','','',NULL,'NV'),(48,'Mike Muscala','','','','','','',NULL,'GA'),(49,'Nathan France','','','7632869241','','','',NULL,''),(51,'Salman Elmi','1-612-385-3207','','','','','',NULL,''),(53,'Shanlee Speeter','','','','','','',NULL,''),(61,'test79','','','','','','',NULL,''),(62,'Test_001','','','','','','',NULL,''),(63,'Test_002','','','','','','',NULL,''),(64,'Trey White','','','(972) 679-8112','','','',NULL,'TX'),(65,'Brent Hicks','','','(972) 977-6644','','','',NULL,'TX'),(66,'Brig Hart','','','(904) 315-8546','','','',NULL,'FL'),(67,'Corey Koskie','','','(612) 386-9462','','','',NULL,''),(68,'Erik Winegarden','','','6126955990','','','',NULL,''),(69,'Misty Lewis','','','2089894496','','','',NULL,'WI'),(70,'Jamie Heipel','','','6128596191','','','',NULL,''),(71,'Thad Schaben','5152708702','','','tschaben@hotspringgreen.com','10860 Hickman Rd','',50325,'IA'),(72,'Ed LeQuire','','','507-206-9340','ed@masterworks.net','','',NULL,''),(73,'Bob Willbanks','612-298-1176','','','bwillbanks@afbnl.com','13670 Crosscliffe Place','',55068,''),(74,'Zaylore Sapphos Stout','612-524-5561','','','zaylore@stoutslaw.com','333 Washington Ave N','300',55401,''),(75,'Barney Coelho','','','612-758-0829','barney@ilumafinancial.com','7701 France Ave S','',55435,''),(76,'Jeff Johnston','','','612-590-2301','jeff.johnston@sandler.com','8891 Airport Rd NE','',55449,''),(79,'Samantha Rehman','','','612-810-5809','serrehman@gmail.com','','',NULL,''),(80,'Jim Jurewicz','','','612-919-3155','brainstormusa@gmail.com','','',NULL,''),(81,'Scott Kaufman','','','612-940-1412','skaufman@liquidcapitalcorp.com','8456 Urbandale Ln N','',55311,''),(82,'Kimberly Hinricksen','','','612-973-8402','kimberly.hinricksen@usbank.com','EP-MN-MN5H Meridian Crossings Buisiness Center Two Meridian Crossings ','',55423,''),(83,'Tim Elemes','','','651-717-8513','tim@huberadvisors.com','Po box 175 ','',55038,''),(84,'Carl Grane','','','678-367-5474','cgrane@easycare.com','6010 Atlantic Blvd','',30071,''),(85,'Loren Gunderson','','','701-893-8722','loren@terrapacificinc.com','Po box 820205','',98682,''),(86,'Kathryn Johnson','','','952-201-0826','kate@katesescapes.com','','',NULL,''),(87,'Brian Thomas','','','952-250-8947','brianthomas@clearrocktechnologies.com','2202 Arnold Palmer Dr.','',55449,''),(88,'Peggy Sherman','','','952-423-1645','shermanlawpa@gmail.com','15322 Galaxie Ave ','202',55124,'MN'),(89,'Jerry Forness','','','612-719-6088','jeforness@aol.com','15555 Saint Moritz Ct','',50901,''),(90,'Alex Emisse','','','763-464-1392','alex.e@mnufc.com','','',NULL,''),(91,'Len Nelson','','','952-215-8944','info@valleylimousa.com','12283 Nicollet Ave','',55337,''),(93,'Paul Lapadat ','','','6122514533','','','',NULL,''),(94,'Doug Brown','','','6127038216','','','',NULL,'');
+/*!40000 ALTER TABLE `Clients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Followup`
+--
+
+DROP TABLE IF EXISTS `Followup`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Followup` (
+  `FollowUpID` int(11) NOT NULL AUTO_INCREMENT,
+  `ClientID` int(11) NOT NULL,
+  `AgentID` int(11) NOT NULL,
+  `FollowUpTime_UTC` datetime NOT NULL,
+  `Completed` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`FollowUpID`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Followup`
+--
+
+LOCK TABLES `Followup` WRITE;
+/*!40000 ALTER TABLE `Followup` DISABLE KEYS */;
+INSERT INTO `Followup` VALUES (3,62,82,'2018-07-19 12:00:00',0),(4,62,82,'2018-07-20 12:00:00',0),(5,62,82,'2018-07-21 15:59:00',0),(6,62,82,'2018-07-16 17:12:00',1),(7,62,82,'2018-07-19 05:00:00',1),(8,62,82,'2018-07-19 07:00:00',0),(9,28,81,'1970-01-01 06:00:00',1),(10,30,81,'2018-07-25 20:00:00',1),(11,50,81,'1970-01-01 12:00:00',1),(12,50,81,'2018-07-27 19:00:00',1),(13,51,70,'2018-07-27 00:00:00',1),(14,11,70,'1970-01-01 06:00:00',0),(15,25,70,'2018-11-30 18:00:00',0),(16,30,70,'2018-08-30 19:00:00',0),(17,63,82,'2018-07-26 20:00:00',1),(18,21,70,'1970-01-01 05:00:00',0),(19,15,70,'2018-08-21 19:00:00',0),(20,70,72,'1970-01-01 12:00:00',0);
+/*!40000 ALTER TABLE `Followup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Notes`
+--
+
+DROP TABLE IF EXISTS `Notes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Notes` (
+  `NoteID` int(11) NOT NULL AUTO_INCREMENT,
+  `AgentID` int(11) NOT NULL,
+  `ClientID` int(11) NOT NULL,
+  `Note` text NOT NULL,
+  `Date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`NoteID`)
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Notes`
+--
+
+LOCK TABLES `Notes` WRITE;
+/*!40000 ALTER TABLE `Notes` DISABLE KEYS */;
+INSERT INTO `Notes` VALUES (1,1,1,'asdf','2018-06-18 05:27:37'),(2,1,1,'fdsa\r\n','2018-06-18 05:39:04'),(3,1,1,'This is yet another note.','2018-06-18 05:39:13'),(4,1,5,'This is an exemplary note.','2018-06-19 03:30:54'),(5,1,5,'Gandy, this is another note. As an example.','2018-06-19 04:11:43'),(22,81,40,'He is a qualified buyer and responsive on his Facebook page. ','2018-06-28 15:34:28'),(25,73,43,'Anthony Rigsby.\r\nMet him at Caribou Coffee at 3044 Excelsior BLVD in Minneapolis, MN near Lake Calhoun. \r\nWorks for US Bank and also has a tour company in Africa. Was looking for empty legs to Kenya. ','2018-06-28 18:35:08'),(30,70,46,'Friend did a text message to me with Bob number and email address and Bob text back to me and want to talk after July 9, 2018','2018-06-30 23:57:52'),(31,72,23,'Had meeting 7/9. Talked about potential ODJ clients with wealth advising firm.','2018-07-10 22:05:30'),(37,70,13,'Had lunch with Bridget-  Got info on brand manger for Dustin and three other companys that she know personalty and one of her family member in CA..','2018-07-14 02:10:00'),(38,70,46,'Bob call back this morning at 9:30 A.M.. He want us to call back in Nov. 2018 for Aircraft maintenance and hire pilots.','2018-07-14 02:13:33'),(39,70,53,'Call Shanlee- Setup meeting after she get back from FL.','2018-07-14 02:16:12'),(44,70,27,'Parker text and want to do Lunch next week...','2018-07-18 00:55:44'),(49,82,62,'test1','2018-07-19 02:11:40'),(50,82,62,'test2','2018-07-19 02:13:37'),(51,82,62,'test3','2018-07-19 02:14:59'),(52,82,62,'test4 .\r\n\r\n07/18/2018 12:00:00 -2:00','2018-07-19 02:16:25'),(53,82,62,'test5','2018-07-19 02:19:44'),(54,82,62,'test6','2018-07-19 02:20:24'),(55,82,62,'test7','2018-07-19 02:20:59'),(56,82,62,'test8','2018-07-19 02:25:30'),(57,82,62,'test9','2018-07-19 02:38:18'),(58,82,62,'test10','2018-07-19 03:00:50'),(59,82,62,'test 11','2018-07-19 03:21:43'),(60,82,62,'test 12','2018-07-19 03:22:21'),(61,82,62,'test 13','2018-07-19 03:23:45'),(62,82,62,'','2018-07-19 03:44:56'),(63,82,62,'Test','2018-07-19 05:11:34'),(68,70,51,'Met up with Salman, We meeting again on Thursday 6pm with him and his partner of his company... this Thursday','2018-07-24 02:59:19'),(69,70,11,'Lisa- have family Emergy. Will call her next month.','2018-07-24 03:00:56'),(70,70,25,'Call Matt- He not ready yet...','2018-07-25 13:37:47'),(72,82,63,'Need to follow up on building the project out further.','2018-07-25 18:55:35'),(73,70,21,'Called and leave voicemail. Client called back...  Talking with wife Terri first... Than circle back next week..','2018-08-07 09:27:40'),(74,70,15,'Called no answer.. Leave voicemail.. Client called back we talk about the programs..Thinking about it..','2018-08-07 09:30:19'),(75,72,70,'Owns retail stores and wholesale. Does very well. reached out on 8/9/18.','2018-08-09 17:26:33');
+/*!40000 ALTER TABLE `Notes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Relations`
+--
+
+DROP TABLE IF EXISTS `Relations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Relations` (
+  `RelationID` int(11) NOT NULL AUTO_INCREMENT,
+  `ClientID` int(11) NOT NULL,
+  `AgentID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`RelationID`),
+  UNIQUE KEY `ClientID` (`ClientID`)
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Relations`
+--
+
+LOCK TABLES `Relations` WRITE;
+/*!40000 ALTER TABLE `Relations` DISABLE KEYS */;
+INSERT INTO `Relations` VALUES (5,10,70),(6,11,70),(7,12,70),(8,13,72),(9,14,70),(10,15,70),(11,16,0),(13,18,70),(14,19,70),(15,20,70),(16,21,70),(17,22,70),(18,23,72),(19,24,70),(20,25,70),(21,26,70),(22,27,70),(35,40,0),(38,43,73),(39,44,72),(41,46,70),(42,47,72),(43,48,72),(44,49,72),(46,51,70),(48,53,70),(53,61,70),(54,62,NULL),(55,63,NULL),(56,64,72),(57,65,72),(58,66,72),(59,67,72),(60,68,72),(61,69,72),(62,70,72),(63,71,79),(64,72,79),(65,73,79),(66,74,79),(67,75,79),(68,76,NULL),(71,79,79),(72,80,79),(73,81,79),(74,82,79),(75,83,79),(76,84,79),(77,85,79),(78,86,79),(79,87,79),(80,88,79),(81,89,79),(82,90,79),(83,91,79),(85,93,72),(86,94,72);
+/*!40000 ALTER TABLE `Relations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Roles`
+--
+
+DROP TABLE IF EXISTS `Roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Roles` (
+  `RoleID` int(11) NOT NULL AUTO_INCREMENT,
+  `RoleName` varchar(15) NOT NULL,
+  PRIMARY KEY (`RoleID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Roles`
+--
+
+LOCK TABLES `Roles` WRITE;
+/*!40000 ALTER TABLE `Roles` DISABLE KEYS */;
+INSERT INTO `Roles` VALUES (1,'Admin'),(2,'User');
+/*!40000 ALTER TABLE `Roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Standings`
+--
+
+DROP TABLE IF EXISTS `Standings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Standings` (
+  `StandingID` int(11) NOT NULL AUTO_INCREMENT,
+  `StandingName` varchar(15) NOT NULL,
+  PRIMARY KEY (`StandingID`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Standings`
+--
+
+LOCK TABLES `Standings` WRITE;
+/*!40000 ALTER TABLE `Standings` DISABLE KEYS */;
+INSERT INTO `Standings` VALUES (1,'Active'),(2,'Inactive'),(3,'Vacation');
+/*!40000 ALTER TABLE `Standings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Status`
+--
+
+DROP TABLE IF EXISTS `Status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Status` (
+  `StatusID` int(11) NOT NULL AUTO_INCREMENT,
+  `StatusName` varchar(15) NOT NULL,
+  PRIMARY KEY (`StatusID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Status`
+--
+
+LOCK TABLES `Status` WRITE;
+/*!40000 ALTER TABLE `Status` DISABLE KEYS */;
+INSERT INTO `Status` VALUES (1,'Hot'),(2,'Warm'),(3,'Cool'),(4,'Active');
+/*!40000 ALTER TABLE `Status` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-01-26  2:12:46
