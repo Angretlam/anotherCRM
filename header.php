@@ -5,26 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="icon" href="/favicon.ico">
 
     <title>On Demand Jet CRM - BETA</title>
 
 
     <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="jumbotron.css" rel="stylesheet">
+    <link href="/jumbotron.css" rel="stylesheet">
   </head>
 
   <body>
 
-    <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #aaa; max-height:60px;">
-      <a class="navbar-brand" href="#"><img src="https://crm.gandywong.com/crmLogo.png" style="max-height:50px;" alt="onDemandJet Logo" /></a>
+    <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+      <a class="navbar-brand" href="#">
+	<img src="https://crm.gandywong.com/crmLogo.png" style="max-height:50px;" alt="onDemandJet Logo" />
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
 <?php
 session_start();
@@ -48,11 +50,7 @@ if (!$_SESSION['authenticated']) {
     }
 
 	echo '
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto"><!--
-          <li class="nav-item active">
-        	<a class="btn btn-success" href="#" role="button">Dashboard</a>
-	</li>-->
+        <ul class="navbar-nav mr-auto">
 
 		<div class="btn-group" style="margin-left: 10px;">
 		  <a href="' . $ROOT_URL . 'clients/index.php"><button type="button" class="btn btn-success">Clients</button></a>
@@ -62,12 +60,29 @@ if (!$_SESSION['authenticated']) {
 		  <div class="dropdown-menu">';
 
                 $query = "
-                        SELECT
-                            Clients.Name, Clients.ClientID
-                        FROM
-                            Clients
-                        ORDER BY
-                            Name";
+			SELECT
+			  Clients.Name,
+			  Clients.ClientID
+			FROM
+			  Clients
+			WHERE
+			  ClientID IN(
+			  SELECT
+			    ClientID
+			  FROM
+			    Relations
+			  WHERE
+			    AgentID IN(
+			    SELECT
+			      AgentID
+			    FROM
+			      Agents
+			    WHERE
+			      Email = '". $_SESSION["email"] ."'
+			  )
+			)
+			ORDER BY NAME
+                            ";
                 $stmt = $link->prepare($query);
                 $stmt->execute();
 
@@ -91,12 +106,18 @@ echo '</div>
                 $query = "
                         SELECT
                         	Agents.Name, Agents.AgentID
-			                  FROM
-                          Agents
-			                  WHERE
-                          AGENTID != 1
-                        ORDER BY
-                          Name
+	                FROM
+        	                Agents
+		        WHERE
+				AGENTID in (
+					(
+						SELECT AgentID
+						FROM Agents
+						WHERE Email = '". $_SESSION["email"] ."'
+					) 
+                		)
+		        ORDER BY
+				Name
                         ";
                 $stmt = $link->prepare($query);
                 $stmt->execute();
@@ -110,6 +131,7 @@ echo '</div>
 
 	echo '
 		  </div>
+	  </div>
         </ul>
 	 <button class="btn btn-success" style="margin-right:10px;" disabled>' . $_SESSION["email"] . '</button>
         <form class="form-inline my-2 my-lg-0" method="POST" action="' . $ROOT_URL . 'auth/logout.php">
@@ -117,8 +139,6 @@ echo '</div>
         </form>';
 }
 ?>
-
-        </div>
         </nav>
 
     <main role="main">

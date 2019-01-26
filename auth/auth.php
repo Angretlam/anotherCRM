@@ -44,7 +44,6 @@ function authenticate ($required_role) {
 			header('Location: ' . $ROOT_URL . '');
 		}
 
-		error_log("weoirusldkjf");
 		return($roles);
 	} else {
 		header('Location: ' . $ROOT_URL . '');

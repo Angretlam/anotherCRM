@@ -2,7 +2,7 @@
       </div>
 
     <footer class="container">
-      <p style="clear:both;">&copy; Company 2017-2018</p>
+      <p style="clear:both;">&copy; On Demand Jet 2017-2018</p>
     </footer>
 
     <!-- Bootstrap core JavaScript

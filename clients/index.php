@@ -64,29 +64,38 @@ if (!$link) {
     exit;
 }
 
-$query = "SELECT Name, Email, WorkNumber, HomeNumber, CellNumber, StreetAddress, Suite, ZipCode, State,
-	(SELECT Name from Agents WHERE AgentID in (SELECT AgentID FROM Relations WHERE ClientID = Clients.ClientID)) as Agent FROM Clients";
+if (array_search(1, $user_roles)) {
+	$query =  "SELECT Name, Email, WorkNumber, HomeNumber, CellNumber, StreetAddress, Suite, ZipCode, State,
+        (SELECT Name from Agents WHERE AgentID in (SELECT AgentID FROM Relations WHERE ClientID = Clients.ClientID)) as Agent FROM Clients";
+} else {
+	$query = "SELECT Name, Email, WorkNumber, HomeNumber, CellNumber, StreetAddress, Suite, ZipCode, State,
+	(SELECT Name from Agents WHERE AgentID in (SELECT AgentID FROM Relations WHERE ClientID = Clients.ClientID)) as Agent FROM Clients WHERE ClientID in (SELECT ClientID FROM Relations WHERE AgentID in (SELECT AgentID FROM Agents WHERE email = '". $_SESSION["email"] ."'))";
+}
 $stmt = $link->prepare($query);
 $stmt->execute();
 mysqli_stmt_bind_result($stmt, $Name, $Email, $WorkNumber, $HomeNumber, $CellNumber, $StreetAddress, $Suite, $ZipCode, $State, $Agent);
 while ($stmt->fetch()) {
 	echo '
 		<a style="color:black;" href="' . $ROOT_URL . 'clients/client.php?name=' . $Name . '">
-		<div class="card" style="width: 45%; margin:10px; background-color:#ee5; float:left;">
-		  <div class="card-body">
-		    <h5 class="card-title">' . $Name . '</h5>
+		<div class="col-sm" style="margin-bottom: 2em; background-color: #ccc;">
+		    <br />
+		    <h5>' . $Name . '</h5>
+		    <ul class="list-group list-group-flush">
+		      <li class="list-group-item">Email: ' . $Email . ' </li>
+		      <li class="list-group-item">Work #: ' . $WorkNumber . ' </li>
+		      <li class="list-group-item">Cell #: ' . $CellNumber . ' </li>';
+
+		/*
+		      <li class="list-group-item">Home Phone: ' . $HomeNumber . ' </li>
+		      <li class="list-group-item">Address: ' . $StreetAddress . ' </li>
+		      <li class="list-group-item">Suite: ' . $Suite . ' </li>
+		      <li class="list-group-item">ZipCode: ' . $ZipCode . ' </li>
+		*/
+		echo '	
+		      <li class="list-group-item">State: ' . $State . ' </li>
+		      <li class="list-group-item">Agent: ' . $Agent . ' </li>
 		    <ul>
-		      <li>Contact Email: ' . $Email . ' </li>
-		      <li>Work Phone: ' . $WorkNumber . ' </li>
-		      <li>Cell Phone: ' . $CellNumber . ' </li>
-		      <li>Home Phone: ' . $HomeNumber . ' </li>
-		      <li>Address: ' . $StreetAddress . ' </li>
-		      <li>Suite: ' . $Suite . ' </li>
-		      <li>ZipCode: ' . $ZipCode . ' </li>
-		      <li>State: ' . $State . ' </li>
-		      <li>Agent: ' . $Agent . ' </li>
-		    <ul>
-		  </div>
+		  <br />
 		</div>
 		</a>
 	';

@@ -40,7 +40,6 @@ if ($test_agent > 0) {
 			" .	$zipcode					. ",
 			'" .	$link->real_escape_string($_POST["State"])	. "'
 			)";;
-	echo $query;
 	$stmt = $link->prepare($query);
 	$stmt->execute();
 
@@ -53,7 +52,8 @@ if ($test_agent > 0) {
 		$clientID = $id;
 	}
 
-	$query = "INSERT INTO Relations (ClientID, AgentID) Values (" . $clientID . ", 0)";
+	$query = "INSERT INTO Relations (ClientID, AgentID) Values (" . $clientID . ", (SELECT AgentID FROM Agents WHERE Email = '". $_SESSION["email"] ."'))";
+	echo $query;
 	$stmt = $link->prepare($query);
 	$stmt->execute();
 

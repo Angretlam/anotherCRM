@@ -39,12 +39,13 @@ if (array_search('1', $user_roles)) {
 	    </div>
 	    <button type="submit" class="btn btn-info">Submit</button>
 	  </form>
-	</div>
-	</div>
-	</div>
+	</div>';
 
-	<div style="width: 80%; margin-left:auto; margin-right:auto;">';
 }
+
+echo '	</div>
+</div>	<div style="width: 80%; margin-left:auto; margin-right:auto;">';
+
 require('../config.php');
 $link = mysqli_connect($DB_SERV, $DB_USER, $DB_PASS, $DB_NAME);
 
@@ -55,13 +56,19 @@ if (!$link) {
     exit;
 }
 
-$query = "SELECT Name, Email, WorkNumber, CellNumber, HomeNumber FROM Agents WHERE AgentID > 1;";
+if (array_search(1, $user_roles)) {
+	$query = "SELECT Name, Email, WorkNumber, CellNumber, HomeNumber FROM Agents WHERE AgentID > 1";
+
+} else {
+	$query = "SELECT Name, Email, WorkNumber, CellNumber, HomeNumber FROM Agents WHERE AgentID in (
+		SELECT AgentID FROM Agents WHERE Email = '". $_SESSION["email"] ."');";
+}
 $stmt = $link->prepare($query);
 $stmt->execute();
 mysqli_stmt_bind_result($stmt, $Name, $Email, $WorkNumber, $CellNumber, $HomeNumber);
 while ($stmt->fetch()) {
 	echo '
-		<div class="card" style="width: 45%; margin:10px; float:left;">
+		<div class="card" style="width: 45%; margin:10px; float:left; height: 230px;">
 			<a href="' . $ROOT_URL . 'agents/agent.php?name=' . $Name . '">
 			  <div class="card-body">
 			    <h5 class="card-title">' . $Name . '</h5>
